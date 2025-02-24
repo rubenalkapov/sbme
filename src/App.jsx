@@ -1,13 +1,14 @@
 import Home from './pages/Home'
-import Contact from './pages/Contact'
 import Navbar from './components/Navbar'
-import Realisations from './pages/Realisations'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import CircularProgress from "@mui/material/CircularProgress";
+
+const Realisations = lazy(() => import("./pages/Realisations"));
 
 const MaterialUISwitch = styled(Switch)(() => ({
   width: 62,
@@ -53,7 +54,7 @@ function App() {
 
   return (
     <Router>
-      <div className={darkMode ? "dark bg-gray-900 text-white" : ""}>
+      <div className={darkMode ? "dark bg-gray-900 text-white min-h-screen" : ""}>
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         <FormControlLabel
           control={
@@ -67,8 +68,13 @@ function App() {
         />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/realisations" element={<Realisations />} />
+          <Route path="/realisations" element={
+            <div className='flex justify-center flex-col items-center'> 
+              <Suspense fallback={<CircularProgress size={40} />}>
+                <Realisations />
+              </Suspense>
+            </div>
+          } />
         </Routes>
       </div>
     </Router>
