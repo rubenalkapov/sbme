@@ -1,6 +1,7 @@
-import Home from './Home'
-import Contact from './Contact'
-import Navbar from './Navbar'
+import Home from './pages/Home'
+import Contact from './pages/Contact'
+import Navbar from './components/Navbar'
+import Realisations from './pages/Realisations'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -8,7 +9,7 @@ import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
-const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+const MaterialUISwitch = styled(Switch)(() => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -67,6 +68,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/realisations" element={<Realisations />} />
         </Routes>
       </div>
     </Router>
